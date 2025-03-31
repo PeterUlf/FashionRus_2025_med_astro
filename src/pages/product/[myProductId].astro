@@ -1,0 +1,23 @@
+---
+//@ts-nocheck
+
+import Layout from "../../layouts/Layout.astro";
+export async function getStaticPaths() {
+  const fashionUrl = "https://kea-alt-del.dk/t7/api/products";
+  const data = await fetch(fashionUrl).then((response) => response.json());
+
+  return data.map((product) => {
+    return {
+      params: { myProductId: product.id },
+      props: { myProduct: product },
+    };
+  });
+}
+
+const { myProduct } = Astro.props;
+---
+
+<Layout>
+  <h1>{myProduct.productdisplayname}</h1>
+  <p>Kategori: {myProduct.category}</p>
+</Layout>

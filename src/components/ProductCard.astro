@@ -4,5 +4,21 @@ const { product } = Astro.props;
 
 <article>
   <h2>{product.productdisplayname}</h2>
-  <!-- <h2>overskrift</h2> -->
+  <p>{product.articletype}</p>
+  <a href=`/product/${product.id}`>Se mere</a>
+  <!-- http://localhost:4321/product/1164 -->
+  {product.soldout == 1 && <p class="soldout">Udsolgt</p>}
+  {
+    product.discount !== null ? (
+      <p class="discount">Rabat {product.discount} ‰</p>
+    ) : (
+      ""
+    )
+  }
 </article>
+
+<style>
+  .soldout {
+    color: red;
+  }
+</style>
